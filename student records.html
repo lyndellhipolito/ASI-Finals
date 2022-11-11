@@ -1,0 +1,141 @@
+<html>
+<head>
+<style>
+
+.font {
+	font-family: "Trebuchet MS", sans-serif;
+	text-align: center;
+}
+
+.weight {
+	font-weight: bold;
+}
+
+.p1 {	
+	font-size: 200%;
+	text-align: center;
+}
+
+.p2 {
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 100%;
+}
+
+.button {
+  border: none;
+  border-radius: 15px;
+  color: white;
+  padding: 25px 180px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  position: absolute;
+  white-space: nowrap;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0e387a;
+}
+
+.button1:hover {
+  background-color: #0e387a;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0e387a;
+  top: 55%;
+  left: 50%;
+}
+
+.button2:hover {
+  background-color: #0e387a;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0e387a;
+  top: 70%;
+  left: 50%;
+}
+
+.button3:hover {
+  background-color: #0e387a;
+  color: white;
+}
+
+.button4 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0e387a;
+  top: 85%;
+  left: 50%;
+}
+
+.button4:hover {
+  background-color: #0e387a;
+  color: white;
+}
+
+#roundcorner {
+  border-radius: 25px;
+  background: #9fafca;
+  padding: 20px;
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#container {
+	height: 500px;
+	width: 500px;
+	border: 1px solid black;
+	position: relative;
+}
+
+#label {
+  	margin: auto;
+	position: absolute;
+	top: -10px;
+	left: 150px;
+	height: 30px;
+	width: 250px;
+	background-color: #0e387a;
+	border: 1px solid black;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div id="roundcorner">
+	<p style="color:#0e387a"; class="font weight p1">STUDENT RECORD DATABASE</p>
+	<p class="font p2">Greetings, what would you like to do?</p>
+  <a href="insertData.html">
+	<button class="font weight button button1";>INSERT RECORD</button> </a> 
+  <a href="selectData.html">
+	<button class="font weight button button2";>SELECT RECORD</button> </a> 
+  <a href="updateData.html">
+	<button class="font weight button button3";>UPDATE RECORD</button> </a> 
+  <a href="deleteData.html">
+	<button class="font weight button button4";>DELETE RECORD</button> </a> 
+</div>
+
+</body>
+</html>
