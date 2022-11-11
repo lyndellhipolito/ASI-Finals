@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.font {
+	font-family: "Trebuchet MS", sans-serif;
+	text-align: center;
+}
+
+.weight {
+	font-weight: bold;
+}
+
+.p1 {	
+	font-size: 160%;
+	text-align: left;
+}
+
+#roundcorner {
+  border-radius: 25px;
+  background: #9fafca;
+  padding: 20px;
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#container {
+	height: 500px;
+	width: 500px;
+	border: 1px solid black;
+	position: relative;
+}
+
+#label {
+  	margin: auto;
+	position: absolute;
+	top: -10px;
+	left: 150px;
+	height: 30px;
+	width: 250px;
+	background-color: #0e387a;
+	border: 1px solid black;
+	text-align: center;
+}
+
+body {
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+input, label {
+    display:block;
+    margin:8px 0px;
+    width: 95%
+}
+
+.button {
+  border: none;
+  border-radius: 50px;
+  color: white;
+  padding: 15px 40px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  position: absolute;
+  white-space: nowrap;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0e387a;
+  top: 40%;
+  left: 30%;
+}
+
+.button1:hover {
+  background-color: #0e387a;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #0e387a;
+  top: 40%;
+  left: 65%;
+}
+
+.button2:hover {
+  background-color: #0e387a;
+  color: white;
+}
+
+</style>
+</head>
+<body>
+
+<div id="roundcorner">
+	<p style="color:#0e387a"; class="font weight p1">DELETE STUDENT RECORD</p>
+	<div>
+	<label for="StudIDbox">STUDENT ID</label>
+    	<input id="StudIDbox" name="StudIDbox" type="text" required>
+  	</div>
+
+    	<button class="font weight button button1"; id = "DeleteButton">DELETE</button>
+
+  	<a href="student records.html">
+    	<button class="font weight button button2";>HOME</button></a>
+
+
+    <!---Import from firebase and configuration--->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCUxnJ7SDI2TuXt8kJ1dZQdNrkB2TeKJEk",
+          authDomain: "asi-database-284e4.firebaseapp.com",
+          databaseURL: "https://asi-database-284e4-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "asi-database-284e4",
+          storageBucket: "asi-database-284e4.appspot.com",
+          messagingSenderId: "493141775756",
+          appId: "1:493141775756:web:72efb890a2f0ef4fd8b2a9"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import {getDatabase, ref, set, get, child, update, remove}
+        from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+        
+        const db = getDatabase();
+
+        // References
+        var StudIDbox = document.getElementById("StudIDbox");
+        var DeleteButton = document.getElementById("DeleteButton");
+
+        //Funtion for Delete
+        function DeleteData() {
+            remove(ref(db, "Student Records/" + StudIDbox.value))
+            .then(() => {
+                alert("Data successfully removed")
+            })
+
+            .catch((error) => {
+                alert("Error, Unsuccessful in deleting data " + error);
+            });
+        }
+
+        //Event for button
+        DeleteButton.addEventListener('click', DeleteData);
+        
+    </script>
+</body>
+</html>
