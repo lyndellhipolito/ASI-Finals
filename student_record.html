@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<head> <style>label{display: inline-block; width: 90px} input,select {width: 130px;}</style></head>
+<body> 
+    <label>Student ID</label> <input id = "StudIDbox" type = "text">
+    <label>First Name</label> <input id = "FirstNamebox" type = "text">
+    <label>Last Name</label> <input id = "LastNamebox" type = "text">
+    <label>Section</label> <input id = "Sectionbox" type = "text">
+    </select>
+
+    <hr>
+    <button id = "InsertButton">Insert</button>
+    <button id = "SelectButton">Select</button>
+    <button id = "UpdateButton">Update</button>
+    <button id = "DeleteButton">Delete</button>
+
+    <!---Import from firebase and configuration--->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCUxnJ7SDI2TuXt8kJ1dZQdNrkB2TeKJEk",
+          authDomain: "asi-database-284e4.firebaseapp.com",
+          databaseURL: "https://asi-database-284e4-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "asi-database-284e4",
+          storageBucket: "asi-database-284e4.appspot.com",
+          messagingSenderId: "493141775756",
+          appId: "1:493141775756:web:72efb890a2f0ef4fd8b2a9"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import {getDatabase, ref, set, get, child, update, remove}
+        from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+        
+        const db = getDatabase();
+
+        // References
+        var StudIDbox = document.getElementById("StudIDbox");
+        var FirstNamebox = document.getElementById("FirstNamebox");
+        var LastNamebox = document.getElementById("LastNamebox");
+        var Sectionbox = document.getElementById("Sectionbox");
+
+        var InsertButton = document.getElementById("InsertButton");
+        var SelectButton = document.getElementById("SelectButton");
+        var UpdateButton = document.getElementById("UpdateButton");
+        var DeleteButton = document.getElementById("DeleteButton");
+
+        // Function for Insert
+        function InsertData() {
+            set(ref(db, "Student Records/" + StudIDbox.value),{
+                StudentID: StudIDbox.value,
+                LastName: LastNamebox.value,
+                FirstName: FirstNamebox.value,
+                Section: Sectionbox.value 
+            })
+            .then(() => {
+                alert("Data successfully stored")
+            })
+
+            .catch((error) => {
+                alert("Error, Unsuccessful in storing data " + error);
+            });
+        }
+
+        //Function for Select
+        function SelectData() {
+            const dbref = ref(db);
+
+            get(child(dbref, "Student Records/" + StudIDbox.value))
+            .then((snapshot) => {
+                if(snapshot.exists()) {
+                    LastNamebox.value = snapshot.val().LastName;
+                    FirstNamebox.value = snapshot.val().FirstName;
+                    Sectionbox.value = snapshot.val().Section;
+                }
+
+                else {
+                    alert("Student not found");
+                }
+            })
+            .catch((error) => {
+                alert("Error, Unsuccessful in selecting data " + error);
+            });
+        }
+
+        //Funtion for Update
+        function UpdateData() {
+            update(ref(db, "Student Records/" + StudIDbox.value),{
+                LastName: LastNamebox.value,
+                FirstName: FirstNamebox.value,
+                Section: Sectionbox.value 
+            })
+            .then(() => {
+                alert("Data successfully updated")
+            })
+
+            .catch((error) => {
+                alert("Error, Unsuccessful in updating data " + error);
+            });
+        }
+
+        //Funtion for Delete
+        function DeleteData() {
+            remove(ref(db, "Student Records/" + StudIDbox.value))
+            .then(() => {
+                alert("Data successfully removed")
+            })
+
+            .catch((error) => {
+                alert("Error, Unsuccessful in deleting data " + error);
+            });
+        }
+
+        // Events for buttons
+        InsertButton.addEventListener('click', InsertData);
+        SelectButton.addEventListener('click', SelectData);
+        UpdateButton.addEventListener('click', UpdateData);
+        DeleteButton.addEventListener('click', DeleteData);
+
+      </script>
+</body>
